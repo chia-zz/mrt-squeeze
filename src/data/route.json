@@ -1,0 +1,15 @@
+{
+  "lineName": "北城捷運 板南線",
+  "lineColor": "#2f80d1",
+  "initialInCarriage": 4,
+  "stations": [
+    { "name": "辛普",     "joke": "為了心上人天天擠這班車", "platform": 4,  "doorSeconds": 10, "alightRatio": 0,    "specialChance": 0.0,  "note": "教學站" },
+    { "name": "薑汁脆",   "joke": "早餐還沒吃完就上車",     "platform": 5,  "doorSeconds": 10, "alightRatio": 0.1,  "specialChance": 0.1 },
+    { "name": "籠山寺",   "joke": "車廂開始像關進籠子",     "platform": 6,  "doorSeconds": 9,  "alightRatio": 0.15, "specialChance": 0.15 },
+    { "name": "膝門",     "joke": "膝蓋卡在車門邊",         "platform": 8,  "doorSeconds": 9,  "alightRatio": 0.1,  "specialChance": 0.2 },
+    { "name": "抬背車站", "joke": "腳不用著地，被人抬著走", "platform": 12, "doorSeconds": 7,  "alightRatio": 0.55, "specialChance": 0.25, "note": "轉乘尖峰" },
+    { "name": "閃身寺",   "joke": "要側身才閃得進去",       "platform": 5,  "doorSeconds": 9,  "alightRatio": 0.25, "specialChance": 0.25, "note": "喘息站" },
+    { "name": "忠孝心聲", "joke": "每個人的內心 OS",        "platform": 8,  "doorSeconds": 8,  "alightRatio": 0.2,  "specialChance": 0.3 },
+    { "name": "忠孝負心", "joke": "說好要等你，車門還是關了", "platform": 12, "doorSeconds": 7,  "alightRatio": 0.5,  "specialChance": 0.3, "note": "轉乘尖峰、終點站" }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "layout": {
+    "width": 720,
+    "height": 1280,
+    "carriage": { "left": 24, "right": 696, "top": 262, "bottom": 720, "wall": 20 },
+    "doors": [ { "x": 200, "width": 132 }, { "x": 520, "width": 132 } ],
+    "prioritySeat": { "x": 34, "y": 272, "width": 150, "height": 104 },
+    "platform": { "top": 730, "bottom": 1130, "edgeLine": 770 },
+    "queue": { "left": 40, "right": 680, "top": 880, "bottom": 1070 },
+    "buttonsY": 1200
+  },
+  "physics": { "friction": 0.02, "frictionStatic": 0.1, "restitution": 0.05, "chamferRatio": 0.38, "slop": 0.04 },
+  "push": {
+    "defaultMode": "drag",
+    "dragFollow": 0.3,
+    "dragMaxSpeed": 22,
+    "flickSampleMs": 90,
+    "flickScale": 1.1,
+    "maxLaunch": 30,
+    "slingMaxPull": 150,
+    "slingPower": 34,
+    "slingTouchSlop": 44,
+    "slingAimAssistDeg": 16,
+    "slingAimDepth": 10,
+    "slingFlightFrictionAir": 0.06,
+    "slingFlightMs": 650,
+    "tapMaxMove": 14,
+    "tapMaxMs": 350,
+    "touchSlop": 22
+  },
+  "door": { "openAnimMs": 450, "closeAnimMs": 320, "jamDelaySec": 3, "warningSec": 3, "jamInset": 5, "jamBounceSpeed": 7, "ejectAfterJams": 2, "ejectSpeed": 6 },
+  "ride": { "durationMs": 2400, "swaySpeed": 2.2, "swayPeriodMs": 700, "scrollSpeed": 18 },
+  "arrive": { "alightAnimMs": 700, "spawnAnimMs": 350 },
+  "actions": { "inwardImpulse": 9, "doorwayCenterPull": 0.15, "broadcastImpulse": 7, "broadcastPerStation": 1 },
+  "scoring": { "board": 100, "allBoardBonus": 500, "special": 300, "jam": -200, "overPressure": -150 },
+  "satisfaction": { "start": 100, "jam": -10, "leftBehindEach": -6, "overPressureEach": -3 }
+}
