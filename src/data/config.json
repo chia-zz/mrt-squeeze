@@ -9,6 +9,11 @@
     "queue": { "left": 40, "right": 680, "top": 880, "bottom": 1070 },
     "buttonsY": 1200
   },
+  "art": {
+    "passengerStyle": "emoji",
+    "emojiSize": 0.8,
+    "emojiBackdropAlpha": 0.35
+  },
   "physics": { "friction": 0.02, "frictionStatic": 0.1, "restitution": 0.05, "chamferRatio": 0.38, "slop": 0.04 },
   "push": {
     "defaultMode": "drag",

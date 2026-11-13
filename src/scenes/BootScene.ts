@@ -1,7 +1,9 @@
 import Phaser from 'phaser';
-import { CONFIG, PASSENGERS, type PassengerType } from '../data';
+import { CONFIG, PASSENGERS, passengerTexture, useEmoji, variantCount, type PassengerType } from '../data';
 
-/** M1：所有乘客都是程式繪製的圓角色塊，不載入任何圖片 */
+const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif';
+
+/** 乘客貼圖全部用程式畫：emoji 版或色塊版（config.json 的 art.passengerStyle） */
 export class BootScene extends Phaser.Scene {
   constructor() {
     super('Boot');
@@ -9,10 +11,53 @@ export class BootScene extends Phaser.Scene {
 
   create() {
     for (const [key, type] of Object.entries(PASSENGERS.types)) {
-      this.makePassengerTexture(`p_${key}`, type);
+      for (let v = 0; v < variantCount(key); v++) {
+        const tex = passengerTexture(key, v);
+        if (useEmoji() && type.emoji?.length) this.makeEmojiTexture(tex, type, type.emoji[v]);
+        else this.makePassengerTexture(tex, type);
+      }
     }
     this.makePlatformTile();
     this.scene.start('Game');
+  }
+
+  /** emoji 版：淡色底（看得出碰撞範圍與乘客類型）＋ emoji ＋ 小配件 */
+  private makeEmojiTexture(key: string, type: PassengerType, emoji: string) {
+    const pad = 4;
+    const w = type.w + pad * 2;
+    const h = type.h + pad * 2;
+    const tex = this.textures.createCanvas(key, w, h);
+    if (!tex) return;
+    const ctx = tex.getContext();
+    const art = CONFIG.art;
+    const r = Math.min(type.w, type.h) * CONFIG.physics.chamferRatio;
+
+    ctx.globalAlpha = art.emojiBackdropAlpha;
+    ctx.fillStyle = type.color;
+    ctx.beginPath();
+    ctx.roundRect(pad, pad, type.w, type.h, r);
+    ctx.fill();
+    ctx.globalAlpha = 0.9;
+    ctx.strokeStyle = type.color;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    const base = Math.min(type.w, type.h);
+    const drawBadge = () => {
+      const b = type.badge;
+      if (!b) return;
+      ctx.font = `${Math.round(base * b.size)}px ${EMOJI_FONT}`;
+      ctx.fillText(b.char, w / 2 + b.x * type.w, h / 2 + b.y * type.h);
+    };
+    if (type.badge?.under) drawBadge();
+    ctx.font = `${Math.round(base * art.emojiSize)}px ${EMOJI_FONT}`;
+    // emoji 的字形視覺中心略低，往上提一點
+    ctx.fillText(emoji, w / 2, h / 2 + base * 0.04);
+    if (!type.badge?.under) drawBadge();
+    tex.refresh();
   }
 
   private makePassengerTexture(key: string, type: PassengerType) {

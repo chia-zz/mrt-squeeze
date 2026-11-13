@@ -19,6 +19,10 @@ export interface PassengerType {
   transformTo?: string;
   special?: 'prioritySeat';
   backpack?: boolean;
+  /** emoji 風格：主圖（多個時每位乘客隨機一個） */
+  emoji?: string[];
+  /** emoji 風格：疊在主圖上的小圖，x/y 為相對中心的位移（以寬高比例計），size 為相對大小 */
+  badge?: { char: string; size: number; x: number; y: number; under?: boolean };
 }
 
 export interface PassengerData {
@@ -56,6 +60,21 @@ export type PushMode = 'drag' | 'sling';
 /** 套用 {key} 參數到 strings.json 的字串 */
 export function t(key: keyof typeof stringsJson, params: Record<string, string | number> = {}): string {
   return STRINGS[key].replace(/\{(\w+)\}/g, (_, k: string) => String(params[k] ?? ''));
+}
+
+/** 乘客的外觀樣式：emoji 或原本的色塊 */
+export function useEmoji(): boolean {
+  return CONFIG.art.passengerStyle === 'emoji';
+}
+
+/** 某類乘客有幾種外觀（色塊只有 1 種） */
+export function variantCount(typeKey: string): number {
+  return useEmoji() ? Math.max(1, PASSENGERS.types[typeKey].emoji?.length ?? 1) : 1;
+}
+
+/** 乘客貼圖名稱；variant 0 就是 `p_類型`（教學示意圖用這個） */
+export function passengerTexture(typeKey: string, variant = 0): string {
+  return variant === 0 ? `p_${typeKey}` : `p_${typeKey}#${variant}`;
 }
 
 export function hex(color: string): number {
